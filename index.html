@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="./main.js" defer></script>
+  </head>
+  <style>
+    .footer:before {
+      bottom: 0;
+      box-shadow:
+        0 1px 1px rgba(0, 0, 0, 0.2),
+        0 8px 0 -3px #f6f6f6,
+        0 9px 1px -3px rgba(0, 0, 0, 0.2),
+        0 16px 0 -6px #f6f6f6,
+        0 17px 2px -6px rgba(0, 0, 0, 0.2);
+      content: "";
+      height: 50px;
+      left: 0;
+      overflow: hidden;
+      position: absolute;
+      right: 0;
+      z-index: 10;
+    }
+
+    .checked {
+      border: 1px solid #fca5a5;
+    }
+  </style>
+
+  <body class="bg-gray-100">
+    <div class="h-creen flex justify-center">
+      <h1 class="text-8xl text-red-800 font-normal pt-[50px]">todos</h1>
+    </div>
+    <div
+      class="h-creen flex flex-col items-center justify-center pt-[37px] border-x-2"
+    >
+      <div class="relative">
+        <svg
+          id="select-all"
+          class="absolute top-6 left-3 cursor-pointer"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-chevron-down"
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+        <input
+          id="input"
+          class="w-[549px] h-[65px] pt-[16px] pb-[16px] pr-[16px] pl-[60px] font-semibold text-xl italic active:outline-red-600 focus-visible:outline-red-600"
+          type="text"
+          placeholder="What needs to be done?"
+        />
+      </div>
+      <ul class="w-[549px] bg-white hidden" id="list"></ul>
+
+      <div
+        class="footer relative h-12 w-[549px] bg-white border hidden"
+        id="footer"
+      >
+        <div
+          class="absolute top-0 left-0 z-50 h-full w-full flex justify-between items-center px-3 py-2"
+        >
+          <span id="count">0 item left!</span>
+          <div class="flex gap-3" data-todo="filters">
+            <a href="#/" class="hover:border cursor-pointer px-2 py-1">All</a>
+            <a
+              href="#/active"
+              class="hover:border border-red-300 cursor-pointer px-2 py-1"
+              >Active</a
+            >
+            <a
+              href="#/complete"
+              class="hover:border border-red-300 cursor-pointer px-2 py-1"
+              >Complete</a
+            >
+          </div>
+          <span
+            id="clear-complete"
+            class="hover:underline decoration-1 cursor-pointer"
+            >Clear complete</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="h-creen text-center text-base justify-center pt-[67px]">
+      <p>Double-click to edit todo</p>
+      <p>Created by the TodoMVC Team</p>
+      <p>
+        Part-of
+        <a href="http://todomvc.com">TodoMVC</a>
+      </p>
+    </div>
+  </body>
+</html>
