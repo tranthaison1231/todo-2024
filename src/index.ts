@@ -1,13 +1,19 @@
-const input = document.getElementById("input");
-const list = document.getElementById("list");
-const selectAllBtn = document.getElementById("select-all");
-const count = document.getElementById("count");
-const clearCompleteBtn = document.getElementById("clear-complete");
-const footer = document.getElementById("footer");
+const input = document.getElementById("input")! as HTMLInputElement;
+const list = document.getElementById("list")!;
+const selectAllBtn = document.getElementById("select-all")!;
+const count = document.getElementById("count")!;
+const clearCompleteBtn = document.getElementById("clear-complete")!;
+const footer = document.getElementById("footer")!;
 
-let TODOS = [];
+interface Todo {
+  id: string;
+  content: string;
+  completed: boolean;
+}
 
-function rennderTodo(todo) {
+let TODOS: Todo[] = [];
+
+function rennderTodo(todo: Todo) {
   const li = document.createElement("li");
   li.dataset.id = todo.id;
   li.className = "group p-4 flex items-center border border-t-1";
@@ -61,11 +67,11 @@ function renderTodos() {
 }
 
 input.onkeyup = function (e) {
-  const value = e.target.value;
-  if (e.key === "Enter" && input.value.trim(" ") !== "") {
+  const target = e.target as HTMLInputElement;
+  if (e.key === "Enter" && input.value.trim() !== "") {
     TODOS.push({
       id: crypto.randomUUID(),
-      content: value,
+      content: target.value.trim(),
       completed: false,
     });
     input.value = "";
@@ -74,14 +80,15 @@ input.onkeyup = function (e) {
 };
 
 list.onclick = function (e) {
-  if (e.target.matches("[data-todo='remove']")) {
+  const target = e.target as HTMLElement;
+  if (target.matches("[data-todo='remove']")) {
     TODOS = TODOS.filter(
-      (todo) => todo.id !== e.target.closest("li").dataset.id,
+      (todo) => todo.id !== target.closest("li")?.dataset.id,
     );
   }
 
-  if (e.target.matches("[data-todo='toggle']")) {
-    const id = e.target.closest("li").dataset.id;
+  if (target.matches("[data-todo='toggle']")) {
+    const id = target.closest("li")?.dataset.id;
     TODOS = TODOS.map((item) => {
       if (item.id === id) {
         return {
